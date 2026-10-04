@@ -1,5 +1,5 @@
 import type { Application, Request, Response, NextFunction } from 'express';
-import ApiError from '../utils/apiError.util.js';
+import ApiError from '@/shared/utils/apiError.util.js';
 
 function notFoundMiddleware(app: Application) {
   app.use((_req: Request, _res: Response, next: NextFunction) => {

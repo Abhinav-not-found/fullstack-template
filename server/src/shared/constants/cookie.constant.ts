@@ -1,5 +1,5 @@
 import type { CookieOptions } from 'express';
-import env from '../config/env.config.js';
+import env from '@/shared/config/env.config.js';
 
 const cookie: {
   accessTokenOpts: CookieOptions;

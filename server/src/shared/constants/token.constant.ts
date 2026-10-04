@@ -1,5 +1,5 @@
 import type { SignOptions } from 'jsonwebtoken';
-import env from '../config/env.config.js';
+import env from '@/shared/config/env.config.js';
 
 const tokenConst = {
   accessTokenExpireIn: { expiresIn: env.IS_PROD ? '5m' : '5s' } satisfies SignOptions,

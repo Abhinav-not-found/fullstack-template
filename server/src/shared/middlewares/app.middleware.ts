@@ -2,7 +2,7 @@ import cookieParser from 'cookie-parser';
 import type { Application } from 'express';
 import express from 'express';
 import morgan from 'morgan';
-import env from '../config/env.config.js';
+import env from '@/shared/config/env.config.js';
 import cors from 'cors';
 
 const appMiddleware = (app: Application) => {

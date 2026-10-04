@@ -1,13 +1,14 @@
 import mongoose from 'mongoose';
 import env from './env.config.js';
-import { colorText } from '../utils/color-text.utils.js';
+import { colorText } from '@/shared/utils/color-text.utils.js';
+import logger from './logger.config.js';
 
 async function connectDb() {
   try {
     const conn = await mongoose.connect(env.MONGODB);
-    console.log(colorText(`Database connected`, 'black', 'green'));
+    logger.info(colorText(`Database connected [name: ${conn.connection.name}]`, 'black', 'green'));
   } catch (error) {
-    console.log('Error in database connection:', error);
+    logger.error(`Error in database connection: ${error}`);
   }
 }
 
