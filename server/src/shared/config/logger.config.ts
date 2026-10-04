@@ -11,6 +11,7 @@ const logger = pino({
       ignore: 'pid,hostname',
     },
   },
+  timestamp: env.IS_PROD,
 });
 
 export default logger;
