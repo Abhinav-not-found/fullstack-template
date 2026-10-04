@@ -6,7 +6,7 @@ import swaggerSpec from '@/shared/config/swagger.config.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const outputDir = path.resolve(__dirname, '../generated');
+const outputDir = path.resolve(__dirname, '../../generated');
 const outputPath = path.join(outputDir, 'openapi.json');
 
 if (!fs.existsSync(outputDir)) {
