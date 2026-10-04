@@ -5,9 +5,9 @@
   "main": "src/server.js",
   "scripts": {
     "setup": "tsx src/scripts/server-setup.ts",
-    "dev": "tsx --watch src/server.ts",
-    "build": "tsc",
-    "start": "npm run build && node dist/server.js",
+    "dev": "node init && npx tsx watch --watch-path=src src/server.ts",
+    "build": "node init && tsc",
+    "start": "node init && npm run build && node dist/server.js",
     "generate:openapi": "tsx src/scripts/generate-openapi.ts",
     "generate:client": "npm run generate:openapi && openapi --input src/generated/openapi.json --output ../client/src/api --client axios"
   },
