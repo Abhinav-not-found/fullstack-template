@@ -17,6 +17,30 @@ git clone <your-repository-url>
 cd <your-project-name>
 ```
 
+## GitHub Template Initialization
+
+This repository includes a GitHub Actions workflow that automatically initializes new repositories created from this template.
+
+When you create a new repository using **Use this template**, the workflow will:
+
+- Replace the copied `README.md` with a project-specific README.
+- Automatically use the new repository's name as the README title.
+- Remove the template initialization workflow from the new repository.
+- Commit and push the changes automatically.
+
+For example, creating a repository named `my-blog` will automatically produce:
+
+```md
+# my-blog
+
+> Built with the Fullstack Template.
+```
+
+The initialization workflow is only executed in repositories created from this template. It does **not** modify the original `fullstack-template` repository.
+
+No manual setup is required. Simply create a repository using **Use this template** and the initialization will happen automatically.
+
+
 ### 3. Set Up the Server
 
 Move into the server directory:
