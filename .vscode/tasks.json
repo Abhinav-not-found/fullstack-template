@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build via command palet",
+      "label": "scaffold-fullstack-server",
       "type": "shell",
       "command": "cd server && npm i && npm run setup",
       "problemMatcher": []
