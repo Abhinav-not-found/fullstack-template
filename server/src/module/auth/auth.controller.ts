@@ -1,11 +1,11 @@
-import cookie from '../../shared/constants/cookie.constant.js';
-import ApiError from '../../shared/utils/apiError.util.js';
-import ApiResponse from '../../shared/utils/apiResponse.util.js';
-import AsyncHandler from '../../shared/utils/async-handler.util.js';
-import { sanitizeUser } from '../../shared/utils/sanitize.util.js';
-import Token from '../../shared/utils/token.util.js';
+import Token from '@/module/auth/auth.token.js';
+import cookieConst from '@/shared/constants/cookie.constant.js';
+import ApiError from '@/shared/utils/apiError.util.js';
+import ApiResponse from '@/shared/utils/apiResponse.util.js';
+import AsyncHandler from '@/shared/utils/async-handler.util.js';
 import AuthDao from './auth.dao.js';
 import AuthSession from './auth.session.js';
+import { getCurrentUser, sanitizeUser } from './auth.util.js';
 
 const authDao = new AuthDao();
 const authSession = new AuthSession();
@@ -26,7 +26,6 @@ class AuthController {
 
     return ApiResponse.created('Register successful', sanitizeUser(newUser)).send(res);
   });
-
   login = AsyncHandler(async (req, res) => {
     const data = req.body;
 
@@ -44,11 +43,9 @@ class AuthController {
   });
 
   logout = AsyncHandler(async (req, res) => {
-    if (!req.user) {
-      throw ApiError.unAuthorized('Unauthorized');
-    }
+    const userId = getCurrentUser(req);
 
-    const user = await authDao.findUserById(req.user.id);
+    const user = await authDao.findUserById(userId);
     if (!user) throw ApiError.notFound('User not found');
 
     if (user.refreshToken === req.cookies.refreshToken) {
@@ -78,14 +75,13 @@ class AuthController {
     }
 
     const newAccessToken = token.generateAccessToken({ id: user._id });
-    res.cookie('accessToken', newAccessToken, cookie.accessTokenOpts);
+    res.cookie('accessToken', newAccessToken, cookieConst.accessTokenOpts);
 
     return ApiResponse.ok('Token refreshed').send(res);
   });
 
   me = AsyncHandler(async (req, res) => {
-    if (!req.user) throw ApiError.unAuthorized('Invalid session');
-    const userId = req.user.id;
+    const userId = getCurrentUser(req);
 
     const user = await authDao.findUserById(userId);
     if (!user) throw ApiError.notFound('User not found');

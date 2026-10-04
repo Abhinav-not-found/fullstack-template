@@ -1,7 +1,7 @@
 import type { Response } from 'express';
 import cookie from '../../shared/constants/cookie.constant.js';
 import type mongoose from 'mongoose';
-import Token from '../../shared/utils/token.util.js';
+import Token from './auth.token.js';
 
 const token = new Token();
 

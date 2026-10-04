@@ -2,7 +2,7 @@ import { Router } from 'express';
 import AuthController from './auth.controller.js';
 import validate from '../../shared/middlewares/validate.middleware.js';
 import AuthValidator from './auth.validator.js';
-import authMiddleware from '../../shared/middlewares/auth.middleware.js';
+import requireAuth from '../../shared/middlewares/auth.middleware.js';
 
 const authRouter = Router();
 const authController = new AuthController();
@@ -34,7 +34,13 @@ const authValidator = new AuthValidator();
  *       409:
  *         description: User already exists
  */
-authRouter.post('/register', validate(authValidator.registerSchema), authController.register);
+authRouter.post(
+  '/register',
+  validate({
+    body: authValidator.registerSchema,
+  }),
+  authController.register,
+);
 
 /**
  * @openapi
@@ -62,7 +68,13 @@ authRouter.post('/register', validate(authValidator.registerSchema), authControl
  *       401:
  *         description: Invalid credentials
  */
-authRouter.post('/login', validate(authValidator.loginSchema), authController.login);
+authRouter.post(
+  '/login',
+  validate({
+    body: authValidator.loginSchema,
+  }),
+  authController.login,
+);
 
 /**
  * @openapi
@@ -80,7 +92,7 @@ authRouter.post('/login', validate(authValidator.loginSchema), authController.lo
  *       401:
  *         description: Unauthorized
  */
-authRouter.post('/logout', authMiddleware, authController.logout);
+authRouter.post('/logout', requireAuth, authController.logout);
 
 /**
  * @openapi
@@ -122,6 +134,6 @@ authRouter.post('/refresh', authController.refresh);
  *       401:
  *         description: Unauthorized
  */
-authRouter.get('/me', authMiddleware, authController.me);
+authRouter.get('/me', requireAuth, authController.me);
 
 export default authRouter;
