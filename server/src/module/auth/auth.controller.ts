@@ -1,8 +1,8 @@
 import Token from '@/module/auth/auth.token.js';
 import cookieConst from '@/shared/constants/cookie.constant.js';
-import ApiError from '@/shared/utils/apiError.util.js';
-import ApiResponse from '@/shared/utils/apiResponse.util.js';
-import AsyncHandler from '@/shared/utils/async-handler.util.js';
+import ApiError from '@/shared/utils/apiError.utils.js';
+import ApiResponse from '@/shared/utils/apiResponse.utils.js';
+import AsyncHandler from '@/shared/utils/async-handler.utils.js';
 import AuthDao from './auth.dao.js';
 import AuthSession from './auth.session.js';
 import { getCurrentUser, sanitizeUser } from './auth.util.js';

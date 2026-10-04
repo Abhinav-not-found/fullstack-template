@@ -1,6 +1,6 @@
 import type { Request } from 'express';
 import type { UserDocument } from '@/module/auth/user.model.js';
-import ApiError from '@/shared/utils/apiError.util.js';
+import ApiError from '@/shared/utils/apiError.utils.js';
 
 export const getCurrentUser = (req: Request) => {
   if (!req.user) throw ApiError.unAuthorized('Invalid session');

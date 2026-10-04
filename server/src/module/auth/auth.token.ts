@@ -2,7 +2,7 @@ import jwt, { type JwtPayload } from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import env from '@/shared/config/env.config.js';
 import tokenConst from '@/shared/constants/token.constant.js';
-import ApiError from '../../shared/utils/apiError.util.js';
+import ApiError from '../../shared/utils/apiError.utils.js';
 import type { AuthPayload } from '@/shared/types/express.js';
 
 interface Payload {

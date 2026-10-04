@@ -1,7 +1,7 @@
 import type { Application, Request, Response, NextFunction } from 'express';
-import ApiError from '@/shared/utils/apiError.util.js';
+import ApiError from '@/shared/utils/apiError.utils.js';
 import logger from '@/shared/config/logger.config.js';
-import { getErrorLocation } from '@/shared/utils/error.util.js';
+import { getErrorLocation } from '@/shared/utils/error.utils.js';
 import { ZodError } from 'zod';
 
 const errorHandler = (err: unknown, req: Request, res: Response, _next: NextFunction) => {

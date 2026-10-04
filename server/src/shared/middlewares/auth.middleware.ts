@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import ApiError from '../utils/apiError.util.js';
+import ApiError from '../utils/apiError.utils.js';
 import Token from '../../module/auth/auth.token.js';
 
 const token = new Token();

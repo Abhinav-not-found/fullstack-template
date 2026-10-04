@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import mongoose from 'mongoose';
-import ApiResponse from '../utils/apiResponse.util.js';
-import ApiError from '../utils/apiError.util.js';
+import ApiResponse from '../utils/apiResponse.utils.js';
+import ApiError from '../utils/apiError.utils.js';
 
 const healthRoute = Router();
 
