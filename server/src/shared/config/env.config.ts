@@ -12,10 +12,32 @@ const envSchema = z.object({
   JWT_SECRET_ACCESS: z.string().min(1, 'JWT_SECRET_ACCESS is required'),
   JWT_SECRET_REFRESH: z.string().min(1, 'JWT_SECRET_REFRESH is required'),
   CLIENT_URL: z.string().url('CLIENT_URL must be a valid URL'),
-  IMAGEKIT_PUBLIC_KEY: z.string().min(1, 'IMAGEKIT_PUBLIC_KEY is required'),
-  IMAGEKIT_PRIVATE_KEY: z.string().min(1, 'IMAGEKIT_PRIVATE_KEY is required'),
-  IMAGEKIT_URL_ENDPOINT: z.string().min(1, 'IMAGEKIT_URL_ENDPOINT is required'),
+  // Optional integration
+  IMAGEKIT_PUBLIC_KEY: z.string().trim().optional(),
+  IMAGEKIT_PRIVATE_KEY: z.string().trim().optional(),
+  IMAGEKIT_URL_ENDPOINT: z.string().trim().optional(),
 });
+
+type Env = z.infer<typeof envSchema>;
+function reportOptionalIntegrations(env: Env) {
+  const imageKitKeys = [
+    'IMAGEKIT_PUBLIC_KEY',
+    'IMAGEKIT_PRIVATE_KEY',
+    'IMAGEKIT_URL_ENDPOINT',
+  ] as const;
+
+  const missing = imageKitKeys.filter((key) => !env[key]?.trim());
+
+  if (!missing.length) return;
+
+  console.warn(`\n${colorText('⚠ Optional integrations', 'yellow')}`);
+  console.warn(`  ${colorText('ImageKit', 'cyan')} is not configured.`);
+
+  console.warn(`  Missing: ${missing.map((key) => colorText(key, 'cyan')).join(', ')}`);
+
+  console.warn(`  Image upload functionality will be unavailable.`);
+  console.warn();
+}
 
 function reportDefaults() {
   const defaults = ['PORT', 'MONGODB'];
@@ -51,6 +73,8 @@ function validateEnv() {
 
     process.exit(1);
   }
+
+  reportOptionalIntegrations(result.data);
 
   return Object.freeze({
     ...result.data,
