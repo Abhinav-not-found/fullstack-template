@@ -1,18 +1,26 @@
 import type { Request, Response, NextFunction } from 'express';
-import type { ZodSchema } from 'zod';
-import ApiError from '../utils/apiError.util.js';
+import type { ZodType } from 'zod';
 
-const validate = (schema: ZodSchema) => {
+type ValidationSchemas = {
+  body?: ZodType;
+  params?: ZodType;
+  query?: ZodType;
+};
+
+const validate = (schemas: ValidationSchemas) => {
   return (req: Request, _res: Response, next: NextFunction) => {
-    const result = schema.safeParse(req.body);
+    try {
+      if (schemas.body) {
+        req.body = schemas.body.parse(req.body);
+      }
 
-    if (!result.success) {
-      throw ApiError.badRequest('', result.error.issues);
+      schemas.params?.parse(req.params);
+      schemas.query?.parse(req.query);
+
+      next();
+    } catch (error) {
+      next(error);
     }
-
-    req.body = result.data;
-
-    next();
   };
 };
 
