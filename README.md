@@ -40,6 +40,20 @@ The initialization workflow is only executed in repositories created from this t
 
 No manual setup is required. Simply create a repository using **Use this template** and the initialization will happen automatically.
 
+>
+> ## Want a Quick Setup? 🤫
+>
+> 1. Open the project in VS Code.
+> 2. Press `Cmd + Shift + P`.
+> 3. Select **Tasks: Run Task**.
+> 4. Select **scaffold-fullstack-server**.
+>
+> This will install the server dependencies and run the setup script.
+>
+
+
+
+--------OR---CONTINUE-------
 
 ### 3. Set Up the Server
 
@@ -146,13 +160,13 @@ The `client` folder is currently empty and can be replaced or updated with your 
 
 Run these commands from the `server` directory:
 
-| Command | Purpose |
-|---|---|
-| `npm run dev` | Start the development server with watch mode |
-| `npm run build` | Compile TypeScript to `dist` |
-| `npm start` | Build and start the compiled server |
-| `npm run generate:openapi` | Generate the OpenAPI specification |
-| `npm run generate:client` | Generate the API client in `client/src/api` |
+| Command                    | Purpose                                      |
+| -------------------------- | -------------------------------------------- |
+| `npm run dev`              | Start the development server with watch mode |
+| `npm run build`            | Compile TypeScript to `dist`                 |
+| `npm start`                | Build and start the compiled server          |
+| `npm run generate:openapi` | Generate the OpenAPI specification           |
+| `npm run generate:client`  | Generate the API client in `client/src/api`  |
 
 ## Starting Your Own Project
 
