@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { spawn } from "child_process";
 
 const envExample = path.join(process.cwd(), ".env.example");
 const env = path.join(process.cwd(), ".env");
@@ -17,4 +18,11 @@ if (!fs.existsSync(env)) {
 }
 
 console.log("✓ Setup complete");
-console.log("Run: npm run dev");
+console.log('Starting development server...\n');
+
+const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+
+spawn(npm, ['run', 'dev'], {
+  stdio: 'inherit',
+  shell: false,
+});
